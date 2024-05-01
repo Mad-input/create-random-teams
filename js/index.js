@@ -1,24 +1,35 @@
 import { utilsApp } from "./utils.js";
 
 const items = JSON.parse(localStorage.getItem("items")) || [];
-const teams = JSON.parse(localStorage.getItem("teams")) || [];
+let teams = JSON.parse(localStorage.getItem("teams")) || [];
 
-const btnAdd = document.getElementById("addItem");
-const inputAdd = document.getElementById("itemValue");
-const containtItems = document.querySelector(".items");
+// DOM Elements
+const btnAdd = document.getElementById("addItem"),
+  inputAdd = document.getElementById("itemValue"),
+  containtItems = document.querySelector(".items"),
+  btnCreateTeams = document.getElementById("createTeam"),
+  lengthTeam = document.getElementById("lengthTeam"),
+  $teamsHTML = document.querySelector(".teams");
 
 btnAdd.addEventListener("click", () => {
   utilsApp.createItem(containtItems, inputAdd, items);
 });
 
+btnCreateTeams.addEventListener("click", () => {
+  utilsApp.createTeams(teams, items, lengthTeam.value);
+});
+
 utilsApp.renderItems(items);
+utilsApp.renderTeamsHTML(teams);
 
 window.addEventListener("DOMContentLoaded", () => {
-  const itemsHTML = document.querySelectorAll(".item");
+  let itemsHTML = document.querySelectorAll(".item");
 
   itemsHTML.forEach((el) => {
-    el.querySelector(".btnRemoveItem").addEventListener("click", () => {
+    const btn = el.querySelector(".btnRemoveItem");
+    btn.addEventListener("click", (e) => {
       const id = el.dataset.id;
+      btn.parentElement.remove();
       utilsApp.deleteItem(id, items);
     });
   });
