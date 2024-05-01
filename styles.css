@@ -1,6 +1,7 @@
 :root {
   --bg: #e9ebf5;
   --bd-c: #dbe1e6;
+  --radius: 5px;
 }
 
 /* montserrat-latin-wght-normal */
@@ -30,11 +31,33 @@ body {
   align-items: center;
   min-height: 100vh;
   background: var(--bg);
+  padding: 20px;
+}
+
+.alert {
+  position: absolute;
+  top: 10px;
+  width: fit-content;
+  height: fit-content;
+  margin: auto;
+  padding: 20px 25px;
+  border-radius: var(--radius);
+  animation: fadeIn 0.2s ease-in-out;
+  &.error {
+    background: #eb6565;
+    color: #28282a;
+  }
+  &.ok {
+    background: #59b35f;
+    color: #131414;
+  }
 }
 
 main {
   .title {
     text-align: center;
+    text-transform: uppercase;
+    font-weight: 500;
   }
   .items {
     display: grid;
@@ -50,6 +73,7 @@ main {
       border-radius: 5px;
       padding: 10px;
       border: 2px solid var(--bd-c);
+      animation: fadeIn 0.5s ease-in-out;
       strong {
         font-size: 18px;
         font-weight: 500;
@@ -79,12 +103,49 @@ main {
   }
 
   .add-item {
-    --radius: 5px;
     display: flex;
     justify-content: center;
-    gap: 10px;
+    align-items: center;
+    gap: 40px;
     padding: 10px;
-
+    height: 70px;
+    margin-bottom: 30px;
+    & > div {
+      display: flex;
+      height: 100%;
+    }
+    & > label {
+      small {
+        font-size: 18px;
+      }
+      input {
+        font-size: 18px;
+        width: 60px;
+        padding: 10px;
+        outline: none;
+        border: 2px solid var(--bd-c);
+        border-radius: var(--radius);
+        &:focus {
+          border-color: #3c4474;
+        }
+      }
+    }
+    #createTeam {
+      display: inline-block;
+      height: 100%;
+      padding: 10px 20px;
+      background: #3c4474;
+      border: none;
+      font-size: 16px;
+      border-radius: var(--radius);
+      color: #fff;
+      cursor: pointer;
+      transition: 0.2s ease-in-out;
+      &:hover {
+        scale: 0.95;
+        background: #666fa7;
+      }
+    }
     #itemValue {
       border: 2px solid var(--bd-c);
       border-radius: var(--radius);
@@ -116,5 +177,55 @@ main {
         }
       }
     }
+  }
+
+  .teams {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 40px;
+    padding: 30px 0;
+
+    .team {
+      background: var(--bg);
+      padding: 25px;
+      border-radius: var(--radius);
+      box-shadow: 0 0 10px 0px rgba(0, 0, 0, 0.2);
+
+      .header_team {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        margin-bottom: 15px;
+        h2 {
+          font-weight: normal;
+        }
+        #btnDeleteTeam {
+          border: none;
+          background: none;
+          outline: none;
+          cursor: pointer;
+        }
+      }
+
+      li {
+        list-style: none;
+        padding: 10px 0;
+        width: 250px;
+        text-align: center;
+        &:not(:last-child) {
+          border-bottom: 1px solid rgba(0, 0, 0, 0.4);
+          margin-bottom: 10px;
+        }
+      }
+    }
+  }
+}
+
+@keyframes fadeIn {
+  from {
+    transform: translateX(-20px);
+    opacity: 0;
   }
 }
