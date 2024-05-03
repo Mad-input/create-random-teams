@@ -64,6 +64,7 @@ main {
     grid-template-columns: repeat(5, minmax(100px, 200px));
     grid-auto-rows: 50px;
     gap: 10px;
+    place-content: center;
     padding: 40px;
     .item {
       background: #fff;
@@ -201,7 +202,7 @@ main {
         h2 {
           font-weight: normal;
         }
-        #btnDeleteTeam {
+        .btnDeleteTeam {
           border: none;
           background: none;
           outline: none;
