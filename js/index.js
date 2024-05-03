@@ -8,29 +8,39 @@ const btnAdd = document.getElementById("addItem"),
   inputAdd = document.getElementById("itemValue"),
   containtItems = document.querySelector(".items"),
   btnCreateTeams = document.getElementById("createTeam"),
-  lengthTeam = document.getElementById("lengthTeam"),
-  $teamsHTML = document.querySelector(".teams");
+  lengthTeam = document.getElementById("lengthTeam");
+
+const selectBtnElements = () => {
+  const btnsDeleteTeam = document.querySelectorAll(".btnDeleteTeam");
+  const btnDeleteItem = document.querySelectorAll(".btnRemoveItem");
+
+  if (items.length > 0) {
+    btnDeleteItem.forEach((btn) => {
+      btn.addEventListener("click", () => {
+        utilsApp.deleteItem(items, btn);
+      });
+    });
+  }
+  if (teams.length > 0) {
+    btnsDeleteTeam.forEach((btn) => {
+      btn.addEventListener("click", () => {
+        utilsApp.deleteTeam(teams, btn);
+        selectBtnElements();
+      });
+    });
+  }
+};
+window.addEventListener("DOMContentLoaded", () => selectBtnElements());
 
 btnAdd.addEventListener("click", () => {
   utilsApp.createItem(containtItems, inputAdd, items);
+  selectBtnElements();
 });
 
 btnCreateTeams.addEventListener("click", () => {
   utilsApp.createTeams(teams, items, lengthTeam.value);
+  selectBtnElements();
 });
 
 utilsApp.renderItems(items);
 utilsApp.renderTeamsHTML(teams);
-
-window.addEventListener("DOMContentLoaded", () => {
-  let itemsHTML = document.querySelectorAll(".item");
-
-  itemsHTML.forEach((el) => {
-    const btn = el.querySelector(".btnRemoveItem");
-    btn.addEventListener("click", (e) => {
-      const id = el.dataset.id;
-      btn.parentElement.remove();
-      utilsApp.deleteItem(id, items);
-    });
-  });
-});
