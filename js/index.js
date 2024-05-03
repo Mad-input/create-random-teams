@@ -4,11 +4,14 @@ const items = JSON.parse(localStorage.getItem("items")) || [];
 let teams = JSON.parse(localStorage.getItem("teams")) || [];
 
 // DOM Elements
-const btnAdd = document.getElementById("addItem"),
-  inputAdd = document.getElementById("itemValue"),
-  containtItems = document.querySelector(".items"),
-  btnCreateTeams = document.getElementById("createTeam"),
-  lengthTeam = document.getElementById("lengthTeam");
+const $ = (value) => document.querySelector(value);
+
+const btnAdd = $("#addItem"),
+  inputAdd = $("#itemValue"),
+  containtItems = $(".items"),
+  btnCreateTeams = $("#createTeam"),
+  lengthTeam = $("#lengthTeam"),
+  formAdd = $("#formAdd");
 
 const selectBtnElements = () => {
   const btnsDeleteTeam = document.querySelectorAll(".btnDeleteTeam");
@@ -32,7 +35,8 @@ const selectBtnElements = () => {
 };
 window.addEventListener("DOMContentLoaded", () => selectBtnElements());
 
-btnAdd.addEventListener("click", () => {
+formAdd.addEventListener("submit", (e) => {
+  e.preventDefault();
   utilsApp.createItem(containtItems, inputAdd, items);
   selectBtnElements();
 });

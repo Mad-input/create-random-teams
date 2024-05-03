@@ -18,15 +18,16 @@ export class utilsApp {
   static ResItem(title) {
     const divItem = document.createElement("div");
     const btnDelete = document.createElement("button");
-    btnDelete.innerHTML = `
+    btnDelete.innerHTML = /*html*/ `
         <svg width="20px" height="20px" viewBox="0 0 24 24" fill="none">
             <path d="M2 12C2 7.28595 2 4.92893 3.46447 3.46447C4.92893 2 7.28595 2 12 2C16.714 2 19.0711 2 20.5355 3.46447C22 4.92893 22 7.28595 22 12C22 16.714 22 19.0711 20.5355 20.5355C19.0711 22 16.714 22 12 22C7.28595 22 4.92893 22 3.46447 20.5355C2 19.0711 2 16.714 2 12Z" stroke="currentColor" stroke-width="1.5"/>
             <path d="M14.5 9.50002L9.5 14.5M9.49998 9.5L14.5 14.5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/>
         </svg>
     `;
     btnDelete.classList.add("btnRemoveItem");
+
     const htmlItem = `<strong class="itemTitle">${
-      title.length > 15 ? `${title.substring(0, 9)}...` : title
+      title.length > 13 ? `${title.substring(0, 9)}...` : title
     }</strong>`;
 
     divItem.innerHTML = htmlItem;
@@ -62,6 +63,9 @@ export class utilsApp {
     while (true) {
       if (items.length < 1) break;
 
+      //Obtener los items hasta el limite indicado
+      //eliminar los items separados
+      // agregarlos a la matriz teams
       let newTeam = items.slice(0, limit);
       items.splice(0, limit);
       teams.push(newTeam);
