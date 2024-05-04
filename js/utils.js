@@ -6,6 +6,8 @@ export class utilsApp {
    */
 
   static createItem(element, title, items) {
+    const btn = document.querySelector("#deleteAllItems");
+
     if (title.value === "") return this.showAlert("Complete Field", "error");
 
     element.append(this.ResItem(title.value));
@@ -70,10 +72,10 @@ export class utilsApp {
       items.splice(0, limit);
       teams.push(newTeam);
     }
-    this.renderTeamsHTML(teams);
-    this.saveInStorge("teams", teams);
-    this.saveInStorge("items", items);
     this.renderItems(items);
+    this.renderTeamsHTML(teams);
+    this.saveInStorge("items", items);
+    this.saveInStorge("teams", teams);
   }
 
   static renderTeamsHTML(teams) {
@@ -93,6 +95,7 @@ export class utilsApp {
       "#CDADD0",
       "#FFE5D2",
     ];
+    const btn = document.querySelector("#deleteAllTeams");
     const $teamsHTML = document.querySelector(".teams");
     $teamsHTML.innerHTML = "";
 
@@ -100,6 +103,7 @@ export class utilsApp {
       teams.forEach((team, index) => {
         const teamElemet = document.createElement("ul");
         teamElemet.classList.add("team");
+        //seleccionar un background aleatoria para cada equipo
         teamElemet.setAttribute(
           "style",
           `--bg: ${colors[Math.round(Math.random() * (colors.length - 1))]};`
@@ -131,6 +135,7 @@ export class utilsApp {
 
   static renderItems(items) {
     const containtItems = document.querySelector(".items");
+    const btn = document.querySelector("#deleteAllItems");
     containtItems.innerHTML = "";
     for (const item of items) {
       containtItems.append(this.ResItem(item));

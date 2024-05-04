@@ -1,7 +1,7 @@
 import { utilsApp } from "./utils.js";
 
-const items = JSON.parse(localStorage.getItem("items")) || [];
-let teams = JSON.parse(localStorage.getItem("teams")) || [];
+const items = JSON.parse(localStorage.getItem("items")) ?? [];
+const teams = JSON.parse(localStorage.getItem("teams")) ?? [];
 
 // DOM Elements
 const $ = (value) => document.querySelector(value);
